@@ -1,0 +1,24 @@
+version: '3.0'
+
+services:
+    rabbitmq:
+      container_name: "rabbitmq"
+      image: rabbitmq:3.7-management
+      command: rabbitmq-server
+      environment:
+        - RABBITMQ_DEFAULT_USER=guest
+        - RABBITMQ_DEFAULT_PASS=guest
+      ports:
+        - 5672:5672
+        - 15672:15672
+      healthcheck:
+        test: [ "CMD", "nc", "-z", "localhost", "5672" ]
+        interval: 5s
+        timeout: 15s
+        retries: 1
+    jaeger:
+      image: jaegertracing/opentelemetry-all-in-one
+      ports:
+        - 13133:13133
+        - 16686:16686
+        - 55680:55680
