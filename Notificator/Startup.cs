@@ -94,7 +94,6 @@ namespace Notificator
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
                 endpoints.MapHub<JobHub>("/jobhub");
             });
         }

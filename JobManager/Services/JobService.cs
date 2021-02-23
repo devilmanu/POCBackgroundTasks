@@ -26,9 +26,15 @@ namespace JobManager.Services
             _backgroundJobClient = backgroundJobClient;
         }
 
-        public IEnumerable<SucceededJobDto> GetJobs(CancellationToken token)
+        public IEnumerable<CompletedJobsDto> GetJobs(CancellationToken token)
         {
-            return JobStorage.Current.GetMonitoringApi().SucceededJobs(0, 100).Select(o => o.Value);
+            return JobStorage.Current.GetMonitoringApi().SucceededJobs(0, 100).Select(o => new CompletedJobsDto { 
+                InSucceededState = o.Value.InSucceededState,
+                JobId = o.Key,
+                Result = o.Value.Result,
+                SucceededAt = o.Value.SucceededAt,
+                TotalDuration = o.Value.TotalDuration
+            });
         }
 
 
@@ -48,12 +54,12 @@ namespace JobManager.Services
             message.JobName = dto.JobName;
             message.JobId = dto.JobId;
             message.Progress = "0%";
-            message.Status = "Initialized";
+            message.Status = JobStatus.Initialized;
             await _publishEndpoint.Publish(message);
 
-            await OpenCli(message);
+            await NOCli(message);
 
-            message.Status = "Finnished";
+            message.Status = JobStatus.Finished;
             message.Progress = "100%";
             await _publishEndpoint.Publish(message);
         }
@@ -70,7 +76,7 @@ namespace JobManager.Services
             p.OutputDataReceived += new DataReceivedEventHandler(async (sender, e) =>
             {
                 message.Progress = e.Data;
-                message.Status = "working";
+                message.Status = JobStatus.InProgress;
                 await _publishEndpoint.Publish(message);
             });
             p.StartInfo.FileName = "C:\\Users\\devil\\source\\repos\\DemoBackgroundTasks\\JobService\\bin\\Debug\\netcoreapp3.1\\JobService.exe";
@@ -84,6 +90,25 @@ namespace JobManager.Services
             p.CancelOutputRead();
             return Task.CompletedTask;
         }
+
+        public async Task NOCli(JobMessage message)
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                message.Progress = $"{(int)Math.Round((double)(100 * i) / 1000)}%";
+                message.Status = JobStatus.InProgress;
+                await _publishEndpoint.Publish(message);
+            };
+        }
+    }
+
+    public class CompletedJobsDto
+    {
+        public string JobId { get; set; }
+        public object Result { get; set; }
+        public long? TotalDuration { get; set; }
+        public DateTime? SucceededAt { get; set; }
+        public bool InSucceededState { get; set; }
     }
 
 }
