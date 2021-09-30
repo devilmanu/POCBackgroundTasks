@@ -1,0 +1,19 @@
+{
+  "name": "demobackgroundtasks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run": "tye run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devilmanu/POCBackgroundTasks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devilmanu/POCBackgroundTasks/issues"
+  },
+  "homepage": "https://github.com/devilmanu/POCBackgroundTasks#readme"
+}

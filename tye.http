@@ -1,0 +1,26 @@
+
+GET http://localhost:63055/jobmanager/jobs
+###
+GET http://localhost:8085/jobmanager/jobs
+
+{
+  "nbf": 1612349886,
+  "exp": 1612353486,
+  "iss": "https://sts.nullexception.fail",
+  "aud": "GoalIdentity_identity_admin_api",
+  "client_id": "GoalIdentity_identity_admin_api_swaggerui",
+  "sub": "391e0e80-4770-4a43-8b58-4b01bcb54289",
+  "auth_time": 1612349835,
+  "idp": "local",
+  "name": "admin",
+  "role": "GoalIdentityIdentityAdminAdministrator",
+  "scope": [
+    "GoalIdentity_identity_admin_api"
+  ],
+  "amr": [
+    "pwd"
+  ]
+}
+
+###
+GET http://demo-blue:9052/

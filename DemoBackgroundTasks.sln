@@ -5,22 +5,27 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3BE64E14-BA7B-4025-85AA-61D2858B8A4C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobService", "JobService\JobService.csproj", "{520C2558-4CE0-4365-B7AD-E2EDBF5F54F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobService", "src\JobService\JobService.csproj", "{520C2558-4CE0-4365-B7AD-E2EDBF5F54F8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobManager", "JobManager\JobManager.csproj", "{3BBCC978-1F53-4393-9390-A62D2DB23D35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JobManager", "src\JobManager\JobManager.csproj", "{3BBCC978-1F53-4393-9390-A62D2DB23D35}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notificator", "Notificator\Notificator.csproj", "{FB7DDABF-C1FD-456D-93D2-491BF55470DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notificator", "src\Notificator\Notificator.csproj", "{FB7DDABF-C1FD-456D-93D2-491BF55470DC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{16EAEBB1-BBCB-4DB1-9C0E-4EFB2B472CD9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{EB88C7EF-90E7-46C2-8449-C8B1BF5822BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "src\Contracts\Contracts.csproj", "{EB88C7EF-90E7-46C2-8449-C8B1BF5822BC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F34401EA-167C-4C9A-81E1-B1DCD1C8E218}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
+		tye.yaml = tye.yaml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenTelemetry.Contrib.Instrumentation.MassTransit", "OpenTelemetry.Contrib.Instrumentation.MassTransit\OpenTelemetry.Contrib.Instrumentation.MassTransit.csproj", "{9EDEE8A5-246C-41AA-999A-D389679124E9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrossCutting", "src\CrossCutting\CrossCutting.csproj", "{8B5401EF-21E3-4857-8B0D-78ACF2E531C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "src\ApiGateway\ApiGateway.csproj", "{9A5827F5-CA64-467D-83BE-50FC5FD84379}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +53,14 @@ Global
 		{9EDEE8A5-246C-41AA-999A-D389679124E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EDEE8A5-246C-41AA-999A-D389679124E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EDEE8A5-246C-41AA-999A-D389679124E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B5401EF-21E3-4857-8B0D-78ACF2E531C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B5401EF-21E3-4857-8B0D-78ACF2E531C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B5401EF-21E3-4857-8B0D-78ACF2E531C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B5401EF-21E3-4857-8B0D-78ACF2E531C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A5827F5-CA64-467D-83BE-50FC5FD84379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A5827F5-CA64-467D-83BE-50FC5FD84379}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A5827F5-CA64-467D-83BE-50FC5FD84379}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A5827F5-CA64-467D-83BE-50FC5FD84379}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +71,8 @@ Global
 		{FB7DDABF-C1FD-456D-93D2-491BF55470DC} = {3BE64E14-BA7B-4025-85AA-61D2858B8A4C}
 		{EB88C7EF-90E7-46C2-8449-C8B1BF5822BC} = {16EAEBB1-BBCB-4DB1-9C0E-4EFB2B472CD9}
 		{9EDEE8A5-246C-41AA-999A-D389679124E9} = {16EAEBB1-BBCB-4DB1-9C0E-4EFB2B472CD9}
+		{8B5401EF-21E3-4857-8B0D-78ACF2E531C8} = {3BE64E14-BA7B-4025-85AA-61D2858B8A4C}
+		{9A5827F5-CA64-467D-83BE-50FC5FD84379} = {3BE64E14-BA7B-4025-85AA-61D2858B8A4C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FA5792DE-365E-4EFF-AEC7-EEB2D278C706}

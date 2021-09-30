@@ -1,0 +1,89 @@
+name: demo
+
+services:
+  - name: apigateway
+    project: src\ApiGateway\ApiGateway.csproj
+    bindings:
+    - protocol: http
+      port: 5000
+    
+  - name: jobmanager
+    project: src\JobManager\JobManager.csproj
+    args: "seed"
+    replicas: 1
+
+  - name: notificator
+    project: src\Notificator\Notificator.csproj
+    replicas: 1
+
+  - name: front
+    dockerFile: web\JobWebClient\Dockerfile
+    volumes: 
+    - source: web\JobWebClient
+      target: /app
+    bindings:
+    - port: 8085
+      protocol: http
+
+  - name: rabbit
+    image: rabbitmq:3-management
+    env: 
+      - name: RABBITMQ_DEFAULT_USER
+        value: adminlocal
+      - name: RABBITMQ_DEFAULT_PASS
+        value: ena10llon  
+    bindings:
+      - port: 15672
+        containerPort: 15672
+        protocol: http
+        name: rabbitmq-webadmin
+      - port: 5672
+        containerPort: 5672
+        protocol: rabbitmq
+        name: rabbitmqc    
+
+  - name: sql
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    env:
+    - name: ACCEPT_EULA
+      value: 'Y'
+    - name: SA_PASSWORD
+      value: fMJkotp0p.
+    bindings:
+    - port: 1433
+    
+  - name: consul
+    replicas: 1
+    image: consul:latest
+    args: consul agent -dev -log-level=warn -ui -client=0.0.0.0 -node consul
+    bindings:
+      - name: consul-port
+        port: 8500
+        containerPort: 8500
+        protocol: http
+        host: consul
+
+  # - name: zipkin
+  #   image: openzipkin/zipkin:latest
+  #   bindings:
+  #   - port: 9411
+  #     name: http
+  #     protocol: http
+
+  # - name: otel-collector
+  #   image: otel/opentelemetry-collector-dev:latest
+  #   args: "--config=/etc/otel-collector-config.yaml"
+  #   bindings:
+  #   - port: 9411
+  #     name: http
+  #     protocol: http     
+
+
+  #   ports:
+  #     - "1888:1888"   # pprof extension
+  #     - "8888:8888"   # Prometheus metrics exposed by the collector
+  #     - "8889:8889"   # Prometheus exporter metrics
+  #     - "13133:13133" # health_check extension
+  #     - "4317"        # OTLP gRPC receiver
+  #     - "55670:55679" # zpages extension
+

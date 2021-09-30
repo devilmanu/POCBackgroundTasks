@@ -1,0 +1,7 @@
+{"container":"rabbit_b22a7d8b-7"}
+{"container":"sql_a34d6dfc-7"}
+{"container":"consul_60a086b4-b"}
+{"container":"apigateway-proxy_3ec44621-5"}
+{"container":"jobmanager-proxy_b5947c02-9"}
+{"container":"notificator-proxy_678e8c9a-1"}
+{"container":"front_2dfe33c5-b"}
